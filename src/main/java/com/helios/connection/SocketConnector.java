@@ -1,4 +1,4 @@
-package com.janek.helios.connection;
+package com.helios.connection;
 
 import org.json.JSONObject;
 

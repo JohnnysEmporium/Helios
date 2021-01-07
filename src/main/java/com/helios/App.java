@@ -1,4 +1,4 @@
-package com.janek.helios;
+package com.helios;
 
 import java.io.*;
 import java.net.*;

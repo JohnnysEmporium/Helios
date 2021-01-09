@@ -11,21 +11,29 @@ new FormModel {
 			name: "this"
 			"maximumSize": new java.awt.Dimension( 230, 340 )
 			"minimumSize": new java.awt.Dimension( 260, 450 )
+			"background": new java.awt.Color( 60, 63, 66, 255 )
+			"foreground": &Color0 new java.awt.Color( 188, 188, 188, 255 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 				"$layoutConstraints": "fill,hidemode 3,align center center"
 				"$columnConstraints": "[fill]"
 				"$rowConstraints": "[][]"
 			} ) {
 				name: "panel3"
+				"background": &Color1 new java.awt.Color( 60, 63, 66, 255 )
+				"foreground": #Color0
 				add( new FormComponent( "javax.swing.JCheckBox" ) {
 					name: "offCheckBox"
 					"text": "Turn off together with PC"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JCheckBox" ) {
 					name: "rainbowCheckBox"
 					"text": "Rainbow effect on start"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 1"
 				} )
@@ -38,43 +46,58 @@ new FormModel {
 				"$rowConstraints": "[][][]"
 			} ) {
 				name: "rgbPanel"
+				"background": #Color1
+				"foreground": #Color0
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "rLabel"
 					"text": "R"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 0,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "gLabel"
 					"text": "G"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 1 0,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "bLabel"
 					"text": "B"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 2 0,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "rTextField"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 1,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "gTextField"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 1 1,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "bTextField"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 2 1,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "rgbColorLabel"
 					"minimumSize": new java.awt.Dimension( 50, 20 )
-					"background": new java.awt.Color( 255, 0, 0, 255 )
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 2 3 1,align center center,growx"
 				} )
@@ -87,20 +110,28 @@ new FormModel {
 				"$rowConstraints": "[][][][]"
 			} ) {
 				name: "ctPanel"
+				"background": #Color1
+				"foreground": #Color0
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "ctLabel"
 					"text": "Color Temperature"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 0,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JSlider" ) {
 					name: "ctSlider"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 1,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "ctGradient"
 					"text": "GRADIENT"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 2,align center center,grow 0 0"
 				} )
@@ -113,20 +144,28 @@ new FormModel {
 				"$rowConstraints": "[][][][]"
 			} ) {
 				name: "brightnessPanel"
+				"background": #Color1
+				"foreground": #Color0
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "brightnessLabel"
 					"text": "Brightness"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 0,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JSlider" ) {
 					name: "brightnessSlider"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 1,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "brightnessPercentageLabel"
 					"text": "PERCENTAGE"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 2,align center center,grow 0 0"
 				} )
@@ -139,23 +178,31 @@ new FormModel {
 				"$columnConstraints": "[][][]"
 			} ) {
 				name: "actionPanel"
+				"background": #Color1
+				"foreground": #Color0
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "saveButton"
 					"text": "Save"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 0,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "discardButton"
 					"text": "Discard"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-					"value": "cell 1 0"
+					"value": "cell 1 0,align center center,grow 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "cancelButton"
 					"text": "Cancel"
+					"background": #Color1
+					"foreground": #Color0
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-					"value": "cell 2 0"
+					"value": "cell 2 0,align center center,grow 0 0"
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 4"

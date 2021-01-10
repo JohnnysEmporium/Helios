@@ -38,9 +38,9 @@ public class HeliosInterface extends JPanel {
         brightnessSlider = new JSlider();
         brightnessPercentageLabel = new JLabel();
         actionPanel = new JPanel();
-        saveButton = new JButton();
-        discardButton = new JButton();
-        cancelButton = new JButton();
+        saveButton = new JXButton();
+        discardButton = new JXButton();
+        cancelButton = new JXButton();
         mainBackgroudColor = new Color(60, 63, 66);
         mainForegoundColor = new Color(188, 188, 188);
 
@@ -229,20 +229,20 @@ public class HeliosInterface extends JPanel {
 
             //---- saveButton ----
             saveButton.setText("Save");
-            saveButton.setBackground(mainBackgroundColor);
-            saveButton.setForeground(mainForegroundColor);
+            saveButton.setBackgroundPainter(new MattePainter(mainBackgroudColor));
+            saveButton.setForegroundPainter(new MattePainter(mainForegoundColor));
             actionPanel.add(saveButton, "cell 0 0,align center center,grow 0 0");
 
             //---- discardButton ----
             discardButton.setText("Discard");
-            discardButton.setBackground(mainBackgroundColor);
-            discardButton.setForeground(mainForegroundColor);
+            discardButton.setBackgroundPainter(new MattePainter(mainBackgroudColor));
+            discardButton.setForegroundPainter(new MattePainter(mainForegoundColor));
             actionPanel.add(discardButton, "cell 1 0,align center center,grow 0 0");
 
             //---- cancelButton ----
             cancelButton.setText("Cancel");
-            cancelButton.setBackground(mainBackgroundColor);
-            cancelButton.setForeground(mainForegroundColor);
+            cancelButton.setBackgroundPainter(new MattePainter(mainBackgroudColor));
+            cancelButton.setForegroundPainter(new MattePainter(mainForegoundColor));
             actionPanel.add(cancelButton, "cell 2 0,align center center,grow 0 0");
         }
         add(actionPanel, "cell 0 4");
@@ -271,9 +271,9 @@ public class HeliosInterface extends JPanel {
     private JSlider brightnessSlider;
     private JLabel brightnessPercentageLabel;
     private JPanel actionPanel;
-    private JButton saveButton;
-    private JButton discardButton;
-    private JButton cancelButton;
+    private JXButton saveButton;
+    private JXButton discardButton;
+    private JXButton cancelButton;
     private Color mainBackgroudColor;
     private Color mainForegoundColor
     // JFormDesigner - End of variables declaration  //GEN-END:variables

@@ -45,6 +45,13 @@
       <version>20201115</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/nz.net.ultraq.preferences/preferences -->
+    <dependency>
+      <groupId>nz.net.ultraq.preferences</groupId>
+      <artifactId>preferences</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
 
 
   </dependencies>

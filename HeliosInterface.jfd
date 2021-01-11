@@ -105,7 +105,7 @@ new FormModel {
 				"value": "cell 0 1"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
-				"$layoutConstraints": "hidemode 3,align center center"
+				"$layoutConstraints": "fill,hidemode 3,align center center"
 				"$columnConstraints": "[fill]"
 				"$rowConstraints": "[][][][]"
 			} ) {

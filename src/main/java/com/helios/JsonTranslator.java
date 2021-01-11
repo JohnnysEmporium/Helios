@@ -1,6 +1,7 @@
 package com.helios;
 
 import com.google.gson.Gson;
+import com.helios.connection.Bulbs;
 import com.helios.connection.SSDPCommunication;
 import com.helios.connection.SocketConnector;
 
@@ -22,11 +23,15 @@ public class JsonTranslator {
         YeelightAPI.SetBright b1 = new YeelightAPI.SetBright(1, "smooth", 10);
         YeelightAPI.SetBright b2 = new YeelightAPI.SetBright(100, "smooth", 50);
         YeelightAPI.SetPower p = new YeelightAPI.SetPower("on", "smooth", 500);
-        String t1 = translate(p);
-        SocketConnector sc = new SocketConnector(SSDPCommunication.getIP(), 55443);
-        sc.sendMessage(t1);
-        System.out.println(sc.response);
-        sc.close();
+        String t1 = translate(b2);
+        Bulbs b = new Bulbs(0);
+        b.sendMessage(t1);
+        b.closeConnection();
+
+        //SocketConnector sc = new SocketConnector(SSDPCommunication.getIP(), 55443);
+        ////sc.sendMessage(t1);
+        //System.out.println(sc.response);
+        //sc.close();
 
 
     }

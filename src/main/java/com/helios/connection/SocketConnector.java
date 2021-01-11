@@ -21,17 +21,21 @@ public class SocketConnector {
         is = new DataInputStream(sck.getInputStream());
         os = new DataOutputStream(sck.getOutputStream());
         pw = new PrintWriter(os);
+        in = new BufferedReader(new InputStreamReader(is));
     }
 
     public void sendMessage(String message) throws IOException {
+        char[] c = new char[5];
         pw.println(message);
         pw.flush();
-        in = new BufferedReader(new InputStreamReader(is));
-        response = new JSONObject(in.readLine()).toString();
+        in.read(c, 0 ,5);
+        System.out.println(c);
+        //response = new JSONObject(in.readLine()).toString();
     }
 
     public void close() throws IOException {
         is.close();
         os.close();
+        sck.close();
     }
 }

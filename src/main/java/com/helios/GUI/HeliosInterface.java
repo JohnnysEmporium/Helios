@@ -12,6 +12,7 @@ import javax.swing.event.DocumentListener;
 
 import com.helios.JsonTranslator;
 import com.helios.YeelightAPI;
+import com.helios.connection.Bulbs;
 import com.helios.connection.SSDPCommunication;
 import com.helios.connection.SocketConnector;
 import net.miginfocom.swing.*;
@@ -50,11 +51,6 @@ public class HeliosInterface extends JPanel {
         cancelButton = new JButton();
         mainBackgroundColor = new Color(60, 63, 66);
         mainForegroundColor = new Color(188, 188, 188);
-        try {
-            sc = new SocketConnector(SSDPCommunication.getIP(), 55443);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
 
         //======== this ========
         setMaximumSize(new Dimension(360, 550));
@@ -105,6 +101,7 @@ public class HeliosInterface extends JPanel {
             checkBoxPanel.add(rainbowCheckBox, "cell 0 1");
         }
         add(checkBoxPanel, "cell 0 0");
+        System.out.println("checkBoxPanel ready");
 
         //======== rgbPanel ========
         {
@@ -174,6 +171,7 @@ public class HeliosInterface extends JPanel {
             rgbPanel.add(rgbColorLabel, "cell 0 2 3 1,align center center,growx");
         }
         add(rgbPanel, "cell 0 1");
+        System.out.println("rgbPanel ready");
 
         //======== ctPanel ========
         {
@@ -204,6 +202,7 @@ public class HeliosInterface extends JPanel {
             ctPanel.add(ctGradient, "cell 0 2,align center center,growx,growy");
         }
         add(ctPanel, "cell 0 2,align center center,growx");
+        System.out.println("ctPanel ready");
 
         //======== brightnessPanel ========
         {
@@ -233,13 +232,12 @@ public class HeliosInterface extends JPanel {
                     brightnessPercentageLabel.setText(brightnessSlider.getValue() + "%");
                     YeelightAPI.SetBright b1 = new YeelightAPI.SetBright(brightnessSlider.getValue(), "smooth", 10);
                     String t1 = JsonTranslator.translate(b1);
-
                     try {
-                        sc.sendMessage(t1);
+                        Bulbs b = new Bulbs(0);
+                        b.sendMessage(t1);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
-                    System.out.println(sc.response);
                 }
             });
             brightnessSlider.addFocusListener(new FocusListener() {
@@ -262,6 +260,7 @@ public class HeliosInterface extends JPanel {
             brightnessPanel.add(brightnessPercentageLabel, "cell 0 2,align center center,grow 0 0");
         }
         add(brightnessPanel, "cell 0 3,align center center,growx");
+        System.out.println("brightnessPanel ready");
 
         //======== actionPanel ========
         {
@@ -328,6 +327,7 @@ public class HeliosInterface extends JPanel {
             actionPanel.add(cancelButton, "cell 2 0,align center center,grow 0 0");
         }
         add(actionPanel, "cell 0 4");
+        System.out.println("actionPanel ready");
         load();
     }
 
@@ -348,7 +348,6 @@ public class HeliosInterface extends JPanel {
             c = null;
         }
 
-        //First check if field is empty, if is, insert 0
         //Then check if value inside the field is over 255, if is, insert 255
         //Additionally change label color each time value is inserted
         @Override
@@ -433,6 +432,5 @@ public class HeliosInterface extends JPanel {
     JButton cancelButton;
     Color mainBackgroundColor;
     Color mainForegroundColor;
-    SocketConnector sc;
 
 }

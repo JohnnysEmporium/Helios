@@ -38,23 +38,21 @@ public class HeliosInterface extends JPanel {
         brightnessSlider = new JSlider();
         brightnessPercentageLabel = new JLabel();
         actionPanel = new JPanel();
-        saveButton = new JXButton();
-        discardButton = new JXButton();
-        cancelButton = new JXButton();
-        mainBackgroudColor = new Color(60, 63, 66);
-        mainForegoundColor = new Color(188, 188, 188);
+        saveButton = new JButton();
+        discardButton = new JButton();
+        cancelButton = new JButton();
 
         //======== this ========
         setMaximumSize(new Dimension(230, 340));
         setMinimumSize(new Dimension(260, 450));
-        setBackground(mainBackgroundColor);
-        setForeground(mainForegroundColor);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-        border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER
-        , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font
-        .BOLD ,12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (
-        new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er"
-        .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBackground(new Color(60, 63, 66));
+        setForeground(new Color(188, 188, 188));
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
         setLayout(new MigLayout(
             "fill,novisualpadding,align center center",
             // columns
@@ -68,8 +66,8 @@ public class HeliosInterface extends JPanel {
 
         //======== panel3 ========
         {
-            panel3.setBackground(mainBackgroundColor);
-            panel3.setForeground(mainForegroundColor);
+            panel3.setBackground(new Color(60, 63, 66));
+            panel3.setForeground(new Color(188, 188, 188));
             panel3.setLayout(new MigLayout(
                 "fill,hidemode 3,align center center",
                 // columns
@@ -80,22 +78,22 @@ public class HeliosInterface extends JPanel {
 
             //---- offCheckBox ----
             offCheckBox.setText("Turn off together with PC");
-            offCheckBox.setBackground(mainBackgroundColor);
-            offCheckBox.setForeground(mainForegroundColor);
+            offCheckBox.setBackground(new Color(60, 63, 66));
+            offCheckBox.setForeground(new Color(188, 188, 188));
             panel3.add(offCheckBox, "cell 0 0");
 
             //---- rainbowCheckBox ----
             rainbowCheckBox.setText("Rainbow effect on start");
-            rainbowCheckBox.setBackground(mainBackgroundColor);
-            rainbowCheckBox.setForeground(mainForegroundColor);
+            rainbowCheckBox.setBackground(new Color(60, 63, 66));
+            rainbowCheckBox.setForeground(new Color(188, 188, 188));
             panel3.add(rainbowCheckBox, "cell 0 1");
         }
         add(panel3, "cell 0 0");
 
         //======== rgbPanel ========
         {
-            rgbPanel.setBackground(mainBackgroundColor);
-            rgbPanel.setForeground(mainForegroundColor);
+            rgbPanel.setBackground(new Color(60, 63, 66));
+            rgbPanel.setForeground(new Color(188, 188, 188));
             rgbPanel.setLayout(new MigLayout(
                 "fillx,hidemode 3,align center center",
                 // columns
@@ -109,49 +107,49 @@ public class HeliosInterface extends JPanel {
 
             //---- rLabel ----
             rLabel.setText("R");
-            rLabel.setBackground(mainBackgroundColor);
-            rLabel.setForeground(mainForegroundColor);
+            rLabel.setBackground(new Color(60, 63, 66));
+            rLabel.setForeground(new Color(188, 188, 188));
             rgbPanel.add(rLabel, "cell 0 0,align center center,grow 0 0");
 
             //---- gLabel ----
             gLabel.setText("G");
-            gLabel.setBackground(mainBackgroundColor);
-            gLabel.setForeground(mainForegroundColor);
+            gLabel.setBackground(new Color(60, 63, 66));
+            gLabel.setForeground(new Color(188, 188, 188));
             rgbPanel.add(gLabel, "cell 1 0,align center center,grow 0 0");
 
             //---- bLabel ----
             bLabel.setText("B");
-            bLabel.setBackground(mainBackgroundColor);
-            bLabel.setForeground(mainForegroundColor);
+            bLabel.setBackground(new Color(60, 63, 66));
+            bLabel.setForeground(new Color(188, 188, 188));
             rgbPanel.add(bLabel, "cell 2 0,align center center,grow 0 0");
 
             //---- rTextField ----
-            rTextField.setBackground(mainBackgroundColor);
-            rTextField.setForeground(mainForegroundColor);
+            rTextField.setBackground(new Color(60, 63, 66));
+            rTextField.setForeground(new Color(188, 188, 188));
             rgbPanel.add(rTextField, "cell 0 1,align center center,grow 0 0");
 
             //---- gTextField ----
-            gTextField.setBackground(mainBackgroundColor);
-            gTextField.setForeground(mainForegroundColor);
+            gTextField.setBackground(new Color(60, 63, 66));
+            gTextField.setForeground(new Color(188, 188, 188));
             rgbPanel.add(gTextField, "cell 1 1,align center center,grow 0 0");
 
             //---- bTextField ----
-            bTextField.setBackground(mainBackgroundColor);
-            bTextField.setForeground(mainForegroundColor);
+            bTextField.setBackground(new Color(60, 63, 66));
+            bTextField.setForeground(new Color(188, 188, 188));
             rgbPanel.add(bTextField, "cell 2 1,align center center,grow 0 0");
 
             //---- rgbColorLabel ----
             rgbColorLabel.setMinimumSize(new Dimension(50, 20));
-            rgbColorLabel.setBackground(mainBackgroundColor);
-            rgbColorLabel.setForeground(mainForegroundColor);
+            rgbColorLabel.setBackground(new Color(60, 63, 66));
+            rgbColorLabel.setForeground(new Color(188, 188, 188));
             rgbPanel.add(rgbColorLabel, "cell 0 2 3 1,align center center,growx");
         }
         add(rgbPanel, "cell 0 1");
 
         //======== ctPanel ========
         {
-            ctPanel.setBackground(mainBackgroundColor);
-            ctPanel.setForeground(mainForegroundColor);
+            ctPanel.setBackground(new Color(60, 63, 66));
+            ctPanel.setForeground(new Color(188, 188, 188));
             ctPanel.setLayout(new MigLayout(
                 "hidemode 3,align center center",
                 // columns
@@ -164,27 +162,27 @@ public class HeliosInterface extends JPanel {
 
             //---- ctLabel ----
             ctLabel.setText("Color Temperature");
-            ctLabel.setBackground(mainBackgroundColor);
-            ctLabel.setForeground(mainForegroundColor);
+            ctLabel.setBackground(new Color(60, 63, 66));
+            ctLabel.setForeground(new Color(188, 188, 188));
             ctPanel.add(ctLabel, "cell 0 0,align center center,grow 0 0");
 
             //---- ctSlider ----
-            ctSlider.setBackground(mainBackgroundColor);
-            ctSlider.setForeground(mainForegroundColor);
+            ctSlider.setBackground(new Color(60, 63, 66));
+            ctSlider.setForeground(new Color(188, 188, 188));
             ctPanel.add(ctSlider, "cell 0 1,align center center,grow 0 0");
 
             //---- ctGradient ----
             ctGradient.setText("GRADIENT");
-            ctGradient.setBackground(mainBackgroundColor);
-            ctGradient.setForeground(mainForegroundColor);
+            ctGradient.setBackground(new Color(60, 63, 66));
+            ctGradient.setForeground(new Color(188, 188, 188));
             ctPanel.add(ctGradient, "cell 0 2,align center center,grow 0 0");
         }
         add(ctPanel, "cell 0 2");
 
         //======== brightnessPanel ========
         {
-            brightnessPanel.setBackground(mainBackgroundColor);
-            brightnessPanel.setForeground(mainForegroundColor);
+            brightnessPanel.setBackground(new Color(60, 63, 66));
+            brightnessPanel.setForeground(new Color(188, 188, 188));
             brightnessPanel.setLayout(new MigLayout(
                 "hidemode 3",
                 // columns
@@ -197,27 +195,27 @@ public class HeliosInterface extends JPanel {
 
             //---- brightnessLabel ----
             brightnessLabel.setText("Brightness");
-            brightnessLabel.setBackground(mainBackgroundColor);
-            brightnessLabel.setForeground(mainForegroundColor);
+            brightnessLabel.setBackground(new Color(60, 63, 66));
+            brightnessLabel.setForeground(new Color(188, 188, 188));
             brightnessPanel.add(brightnessLabel, "cell 0 0,align center center,grow 0 0");
 
             //---- brightnessSlider ----
-            brightnessSlider.setBackground(mainBackgroundColor);
-            brightnessSlider.setForeground(mainForegroundColor);
+            brightnessSlider.setBackground(new Color(60, 63, 66));
+            brightnessSlider.setForeground(new Color(188, 188, 188));
             brightnessPanel.add(brightnessSlider, "cell 0 1,align center center,grow 0 0");
 
             //---- brightnessPercentageLabel ----
             brightnessPercentageLabel.setText("PERCENTAGE");
-            brightnessPercentageLabel.setBackground(mainBackgroundColor);
-            brightnessPercentageLabel.setForeground(mainForegroundColor);
+            brightnessPercentageLabel.setBackground(new Color(60, 63, 66));
+            brightnessPercentageLabel.setForeground(new Color(188, 188, 188));
             brightnessPanel.add(brightnessPercentageLabel, "cell 0 2,align center center,grow 0 0");
         }
         add(brightnessPanel, "cell 0 3,align center center,grow 0 0");
 
         //======== actionPanel ========
         {
-            actionPanel.setBackground(mainBackgroundColor);
-            actionPanel.setForeground(mainForegroundColor);
+            actionPanel.setBackground(new Color(60, 63, 66));
+            actionPanel.setForeground(new Color(188, 188, 188));
             actionPanel.setLayout(new MigLayout(
                 "fill,hidemode 3",
                 // columns
@@ -229,20 +227,20 @@ public class HeliosInterface extends JPanel {
 
             //---- saveButton ----
             saveButton.setText("Save");
-            saveButton.setBackgroundPainter(new MattePainter(mainBackgroudColor));
-            saveButton.setForegroundPainter(new MattePainter(mainForegoundColor));
+            saveButton.setBackground(new Color(60, 63, 66));
+            saveButton.setForeground(new Color(188, 188, 188));
             actionPanel.add(saveButton, "cell 0 0,align center center,grow 0 0");
 
             //---- discardButton ----
             discardButton.setText("Discard");
-            discardButton.setBackgroundPainter(new MattePainter(mainBackgroudColor));
-            discardButton.setForegroundPainter(new MattePainter(mainForegoundColor));
+            discardButton.setBackground(new Color(60, 63, 66));
+            discardButton.setForeground(new Color(188, 188, 188));
             actionPanel.add(discardButton, "cell 1 0,align center center,grow 0 0");
 
             //---- cancelButton ----
             cancelButton.setText("Cancel");
-            cancelButton.setBackgroundPainter(new MattePainter(mainBackgroudColor));
-            cancelButton.setForegroundPainter(new MattePainter(mainForegoundColor));
+            cancelButton.setBackground(new Color(60, 63, 66));
+            cancelButton.setForeground(new Color(188, 188, 188));
             actionPanel.add(cancelButton, "cell 2 0,align center center,grow 0 0");
         }
         add(actionPanel, "cell 0 4");
@@ -271,10 +269,8 @@ public class HeliosInterface extends JPanel {
     private JSlider brightnessSlider;
     private JLabel brightnessPercentageLabel;
     private JPanel actionPanel;
-    private JXButton saveButton;
-    private JXButton discardButton;
-    private JXButton cancelButton;
-    private Color mainBackgroudColor;
-    private Color mainForegoundColor
+    private JButton saveButton;
+    private JButton discardButton;
+    private JButton cancelButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

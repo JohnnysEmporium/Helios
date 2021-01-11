@@ -36,32 +36,34 @@ public class TrayGUI extends JFrame {
             System.out.println("system tray supported");
             popup = new PopupMenu();
             tray=SystemTray.getSystemTray();
-            Image image=Toolkit.getDefaultToolkit().getImage("images/ico.jpg");
+            Image image=Toolkit.getDefaultToolkit().getImage("images/bb.jpg");
             trayIcon=new TrayIcon(image, "SystemTray Demo", popup);
             trayIcon.setImageAutoSize(true);
         }else{
             System.out.println("system tray not supported");
         }
 
-        //Exit instantly on Exit button
-        mi = new MenuItem("Exit");
-        mi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Exiting....");
-                System.exit(0);
-            }
-        });
-        popup.add(mi);
+        {
+            //Open GUI
+            mi = new MenuItem("Open");
+            mi.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    openFromTray();
+                }
+            });
+            popup.add(mi);
 
-        //Open GUI
-        mi=new MenuItem("Open");
-        mi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setVisible(true);
-                setExtendedState(JFrame.NORMAL);
-            }
-        });
-        popup.add(mi);
+            //Exit instantly on Exit button
+            mi = new MenuItem("Exit");
+            mi.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Exiting....");
+                    System.exit(0);
+                }
+            });
+            popup.add(mi);
+            System.out.println("menuItems added");
+        }
 
         //SET TRAY LISTENERS
         {
@@ -73,6 +75,8 @@ public class TrayGUI extends JFrame {
                     }
                 }
             });
+            System.out.println("tray listeners added");
+
         }
 
 
@@ -105,6 +109,7 @@ public class TrayGUI extends JFrame {
                     hideToTray();
                 }
             });
+            System.out.println("window state listeners added");
         }
 
 
@@ -116,9 +121,9 @@ public class TrayGUI extends JFrame {
 
         //SHOW THE FRAME
         gui = new HeliosInterface();
+        System.out.println("HeliosInterface set");
         add(gui, BorderLayout.CENTER);
-        setVisible(true);
-        setState(ICONIFIED);
+        hideToTray();
      }
 
 

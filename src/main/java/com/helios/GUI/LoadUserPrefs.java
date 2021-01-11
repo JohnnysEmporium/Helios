@@ -12,7 +12,7 @@ public class LoadUserPrefs {
         return p.getBoolean(k, false);
     }
     private static String ls(String k){
-        return p.get(k, "");
+        return p.get(k, "0");
     }
 
     public static void load(HeliosInterface app){

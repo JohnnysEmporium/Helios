@@ -25,6 +25,8 @@ public class HeliosInterface extends JPanel {
         initComponents();
     }
 
+    Bulbs b;
+
     private void initComponents() {
         checkBoxPanel = new JPanel();
         offCheckBox = new JCheckBox();
@@ -51,6 +53,11 @@ public class HeliosInterface extends JPanel {
         cancelButton = new JButton();
         mainBackgroundColor = new Color(60, 63, 66);
         mainForegroundColor = new Color(188, 188, 188);
+        try {
+            b = new Bulbs(0);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         //======== this ========
         setMaximumSize(new Dimension(360, 550));
@@ -233,7 +240,7 @@ public class HeliosInterface extends JPanel {
                     YeelightAPI.SetBright b1 = new YeelightAPI.SetBright(brightnessSlider.getValue(), "smooth", 10);
                     String t1 = JsonTranslator.translate(b1);
                     try {
-                        Bulbs b = new Bulbs(0);
+
                         b.sendMessage(t1);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();

@@ -14,7 +14,7 @@ public class SocketConnector {
     private BufferedReader in;
     private PrintWriter pw;
     public String response;
-
+    char[] c;
 
     public SocketConnector(String ip, int port) throws IOException {
         sck = new Socket(ip, port);
@@ -25,12 +25,10 @@ public class SocketConnector {
     }
 
     public void sendMessage(String message) throws IOException {
-        char[] c = new char[5];
+        c = new char[5];
         pw.println(message);
         pw.flush();
-        in.read(c, 0 ,5);
-        System.out.println(c);
-        //response = new JSONObject(in.readLine()).toString();
+        response = new JSONObject(in.readLine()).toString();
     }
 
     public void close() throws IOException {

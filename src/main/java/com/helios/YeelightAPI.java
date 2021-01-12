@@ -1,5 +1,7 @@
 package com.helios;
 
+import com.google.gson.Gson;
+
 public class YeelightAPI {
 
     public static class Methods {
@@ -7,8 +9,8 @@ public class YeelightAPI {
     }
 
     public static class SetPower extends Methods {
-        private String method = "set_power";
-        private Object[] params = new Object[3];
+        private static String method = "set_power";
+        private static Object[] params = new Object[3];
 
         public SetPower(String status, String mode, int duration) {
             params[0] = status;
@@ -29,7 +31,7 @@ public class YeelightAPI {
         }
     }
 
-    public static class SetBright extends Methods {
+    public class SetBright extends Methods {
         private String method = "set_bright";
         private Object[] params = new Object[3];
 
@@ -37,7 +39,7 @@ public class YeelightAPI {
             params[0] = intensity;
             params[1] = mode;
             params[2] = duration;
-
+            translate(this);
         }
     }
 
@@ -75,5 +77,8 @@ public class YeelightAPI {
 
     }
 
-
+    private static String translate(Object c){
+        Gson g = new Gson();
+        return g.toJson(c);
+    }
 }

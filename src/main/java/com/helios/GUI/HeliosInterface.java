@@ -3,7 +3,6 @@ package com.helios.GUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import javax.print.Doc;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -13,8 +12,6 @@ import javax.swing.event.DocumentListener;
 import com.helios.JsonTranslator;
 import com.helios.YeelightAPI;
 import com.helios.connection.Bulbs;
-import com.helios.connection.SSDPCommunication;
-import com.helios.connection.SocketConnector;
 import net.miginfocom.swing.*;
 
 /**
@@ -237,7 +234,10 @@ public class HeliosInterface extends JPanel {
                 @Override
                 public void stateChanged(ChangeEvent e) {
                     brightnessPercentageLabel.setText(brightnessSlider.getValue() + "%");
-                    YeelightAPI.SetBright b1 = new YeelightAPI.SetBright(brightnessSlider.getValue(), "smooth", 10);
+                    YeelightAPI y = new YeelightAPI();
+                    y.SetBright(brightnessSlider.getValue(), "smooth", 10);
+
+                         //   b1 = YeelightAPI.SetBright(brightnessSlider.getValue(), "smooth", 10);
                     String t1 = JsonTranslator.translate(b1);
                     try {
 

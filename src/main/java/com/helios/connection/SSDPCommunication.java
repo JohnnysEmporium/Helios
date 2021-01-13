@@ -44,7 +44,7 @@ public class SSDPCommunication {
         return response;
     }
 
-    //Returns IP in a String from the response in findDevice()
+    //Returns IPs in ArrayList<String> form, from the response in findDevice()
     public static ArrayList<String> getIP() throws IOException {
         ArrayList<String> ret = new ArrayList<String>();
         String deviceInfo = findDevices();

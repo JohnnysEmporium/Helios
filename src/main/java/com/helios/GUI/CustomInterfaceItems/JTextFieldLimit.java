@@ -1,4 +1,4 @@
-package com.helios.GUI;
+package com.helios.GUI.CustomInterfaceItems;
 
 import javax.swing.text.PlainDocument;
 import javax.swing.text.AttributeSet;
@@ -7,7 +7,7 @@ import javax.swing.text.BadLocationException;
 public class JTextFieldLimit extends PlainDocument {
     private int limit;
 
-    JTextFieldLimit(int limit) {
+    public JTextFieldLimit(int limit) {
         super();
         this.limit = limit;
     }

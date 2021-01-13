@@ -2,16 +2,14 @@ package com.helios.GUI;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
-import com.helios.JsonTranslator;
-import com.helios.YeelightAPI;
-import com.helios.connection.Bulbs;
+import com.helios.GUI.CustomInterfaceItems.GradientLabel;
+import com.helios.GUI.CustomInterfaceItems.JTextFieldLimit;
+import com.helios.GUI.Listeners.SliderListener;
+import com.helios.GUI.Listeners.ButtonsListener;
+import com.helios.GUI.Listeners.RGBListener;
+import com.helios.connection.YeelightAPI;
 import net.miginfocom.swing.*;
 
 /**
@@ -22,9 +20,15 @@ public class HeliosInterface extends JPanel {
         initComponents();
     }
 
-    Bulbs b;
-
     private void initComponents() {
+
+        //Initialize Yeelight API components
+        yAPI = new YeelightAPI(0);
+        power = new YeelightAPI.Power();
+        colorTemp = new YeelightAPI.ColorTemp();
+        flow = new YeelightAPI.Flow();
+
+        //Initizlize GUI components
         checkBoxPanel = new JPanel();
         offCheckBox = new JCheckBox();
         rainbowCheckBox = new JCheckBox();
@@ -38,11 +42,11 @@ public class HeliosInterface extends JPanel {
         rgbColorLabel = new JLabel();
         ctPanel = new JPanel();
         ctLabel = new JLabel();
-        ctSlider = new JSlider();
+        ctSlider = new JSlider(1700,6500);
         ctGradient = new GradientLabel();
         brightnessPanel = new JPanel();
         brightnessLabel = new JLabel();
-        brightnessSlider = new JSlider();
+        brightnessSlider = new JSlider(1,100);
         brightnessPercentageLabel = new JLabel();
         actionPanel = new JPanel();
         saveButton = new JButton();
@@ -50,11 +54,7 @@ public class HeliosInterface extends JPanel {
         cancelButton = new JButton();
         mainBackgroundColor = new Color(60, 63, 66);
         mainForegroundColor = new Color(188, 188, 188);
-        try {
-            b = new Bulbs(0);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        buttonReleaseColor = new Color(35,35,35);
 
         //======== this ========
         setMaximumSize(new Dimension(360, 550));
@@ -145,7 +145,8 @@ public class HeliosInterface extends JPanel {
             rTextField.setForeground(mainForegroundColor);
             rTextField.setDocument(new JTextFieldLimit(3));
             rTextField.setText("0");
-            rTextField.getDocument().addDocumentListener(new DocListener(rTextField));
+            rTextField.setName("r");
+            rTextField.getDocument().addDocumentListener(new RGBListener(rTextField, rgbColorLabel));
             rTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(rTextField, "cell 0 1,align center center,growx");
 
@@ -154,7 +155,8 @@ public class HeliosInterface extends JPanel {
             gTextField.setForeground(mainForegroundColor);
             gTextField.setDocument(new JTextFieldLimit(3));
             gTextField.setText("0");
-            gTextField.getDocument().addDocumentListener(new DocListener(gTextField));
+            gTextField.setName("g");
+            gTextField.getDocument().addDocumentListener(new RGBListener(gTextField, rgbColorLabel));
             gTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(gTextField, "cell 1 1,align center center,growx");
 
@@ -164,7 +166,8 @@ public class HeliosInterface extends JPanel {
             bTextField.setForeground(mainForegroundColor);
             bTextField.setDocument(new JTextFieldLimit(3));
             bTextField.setText("0");
-            bTextField.getDocument().addDocumentListener(new DocListener(bTextField));
+            bTextField.setName("b");
+            bTextField.getDocument().addDocumentListener(new RGBListener(bTextField, rgbColorLabel));
             bTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(bTextField, "cell 2 1,align center center,growx");
 
@@ -199,6 +202,9 @@ public class HeliosInterface extends JPanel {
             //---- ctSlider ----
             ctSlider.setBackground(mainBackgroundColor);
             ctSlider.setForeground(mainForegroundColor);
+            ctSlider.setName("ct");
+            ctSlider.setInverted(true);
+            ctSlider.addMouseListener(new SliderListener(ctSlider));
             ctPanel.add(ctSlider, "cell 0 1,align center center,growx");
 
             //---- ctGradient ----
@@ -230,34 +236,8 @@ public class HeliosInterface extends JPanel {
             //---- brightnessSlider ----
             brightnessSlider.setBackground(mainBackgroundColor);
             brightnessSlider.setForeground(mainForegroundColor);
-            brightnessSlider.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    brightnessPercentageLabel.setText(brightnessSlider.getValue() + "%");
-                    YeelightAPI y = new YeelightAPI();
-                    y.SetBright(brightnessSlider.getValue(), "smooth", 10);
-
-                         //   b1 = YeelightAPI.SetBright(brightnessSlider.getValue(), "smooth", 10);
-                    String t1 = JsonTranslator.translate(b1);
-                    try {
-
-                        b.sendMessage(t1);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }
-            });
-            brightnessSlider.addFocusListener(new FocusListener() {
-                @Override
-                public void focusGained(FocusEvent e) {
-
-                }
-
-                @Override
-                public void focusLost(FocusEvent e) {
-
-                }
-            });
+            brightnessSlider.setName("brightness");
+            brightnessSlider.addMouseListener(new SliderListener(brightnessSlider, brightnessPercentageLabel));
             brightnessPanel.add(brightnessSlider, "cell 0 1,align center center,growx");
 
             //---- brightnessPercentageLabel ----
@@ -287,7 +267,7 @@ public class HeliosInterface extends JPanel {
             saveButton.setBackground(mainBackgroundColor);
             saveButton.setForeground(mainForegroundColor);
             saveButton.setContentAreaFilled(false);
-            saveButton.addMouseListener(new buttonMouseHold(saveButton));
+            saveButton.addMouseListener(new ButtonsListener(saveButton, mainForegroundColor, buttonReleaseColor));
             saveButton.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(mainForegroundColor, 1),
                     BorderFactory.createEmptyBorder(5, 10, 5, 10)));
@@ -304,7 +284,7 @@ public class HeliosInterface extends JPanel {
             discardButton.setBackground(mainBackgroundColor);
             discardButton.setForeground(mainForegroundColor);
             discardButton.setContentAreaFilled(false);
-            saveButton.addMouseListener(new buttonMouseHold(saveButton));
+            discardButton.addMouseListener(new ButtonsListener(discardButton, mainForegroundColor, buttonReleaseColor));
             discardButton.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(mainForegroundColor, 1),
                     BorderFactory.createEmptyBorder(5, 10, 5, 10)));
@@ -322,7 +302,7 @@ public class HeliosInterface extends JPanel {
             cancelButton.setBackground(mainBackgroundColor);
             cancelButton.setForeground(mainForegroundColor);
             cancelButton.setContentAreaFilled(false);
-            saveButton.addMouseListener(new buttonMouseHold(saveButton));
+            cancelButton.addMouseListener(new ButtonsListener(cancelButton, mainForegroundColor, buttonReleaseColor));
             cancelButton.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(mainForegroundColor, 1),
                     BorderFactory.createEmptyBorder(5, 10, 5, 10)));
@@ -339,80 +319,18 @@ public class HeliosInterface extends JPanel {
     }
 
 
-    //DocumentListener custom class
-    //Prevents entering value higher than 255 in text fields
-    //Changes the color of rgbColorLabel to match given rgb values
-    //Put into inner class to avoid code repetition
-    class DocListener implements DocumentListener {
-        JTextField tf;
-        DocListener(JTextField textField){
-            tf = textField;
-        }
-
-        private void changeLabelColor(){
-            Color c = new Color(Integer.parseInt(rTextField.getText()), Integer.parseInt(gTextField.getText()), Integer.parseInt(bTextField.getText()));
-            rgbColorLabel.setBackground(c);
-            c = null;
-        }
-
-        //Then check if value inside the field is over 255, if is, insert 255
-        //Additionally change label color each time value is inserted
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-            if (Integer.parseInt(tf.getText()) > 255) {
-                Runnable r = new Runnable() {
-                    @Override
-                    public void run() {
-                        tf.setText("255");
-                        changeLabelColor();
-                    }
-                };
-                SwingUtilities.invokeLater(r);
-            } else {
-                changeLabelColor();
-            }
-
-        }
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-            //changeLabelColor();
-        }
-        @Override
-        public void changedUpdate(DocumentEvent e) {System.out.println("change");}
-    }
-
-    //MouseAdapter custom class
-    //Changes button border when clicked, then back to default when released
-    //Gives buttons the "push" look
-    class buttonMouseHold extends MouseAdapter {
-        JButton btn;
-        buttonMouseHold(JButton b){
-            btn = b;
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            super.mousePressed(e);
-            btn.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(35,35,35), 5),
-                    BorderFactory.createEmptyBorder(1, 6, 1, 6)));
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            super.mouseReleased(e);
-            btn.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(mainForegroundColor, 1),
-                    BorderFactory.createEmptyBorder(5, 10, 5, 10)));
-        }
-    }
-
     private void save(){
         SaveUserPrefs.save(this);
     }
     private void load(){
         LoadUserPrefs.load(this);
     }
+
+    //Bulb Controls
+    YeelightAPI yAPI;
+    YeelightAPI.Power power;
+    YeelightAPI.ColorTemp colorTemp;
+    YeelightAPI.Flow flow;
 
     JPanel checkBoxPanel;
     JCheckBox offCheckBox;
@@ -439,5 +357,5 @@ public class HeliosInterface extends JPanel {
     JButton cancelButton;
     Color mainBackgroundColor;
     Color mainForegroundColor;
-
+    Color buttonReleaseColor;
 }

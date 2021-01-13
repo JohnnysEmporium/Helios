@@ -1,4 +1,4 @@
-package com.helios.GUI;
+package com.helios.GUI.CustomInterfaceItems;
 
 import javax.swing.*;
 import java.awt.*;

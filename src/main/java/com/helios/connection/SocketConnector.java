@@ -1,37 +1,76 @@
 package com.helios.connection;
 
+import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
-public class SocketConnector {
+class SocketConnector {
 
-    private Socket sck;
-    private DataInputStream is;
-    private DataOutputStream os;
-    private BufferedReader in;
-    private PrintWriter pw;
-    public String response;
-    char[] c;
+    private static Gson g = new Gson();
+    private static Socket sck;
+    private static DataInputStream is;
+    private static DataOutputStream os;
+    private static BufferedReader in;
+    private static PrintWriter pw;
+    //Bulb index passed to ArrayList<String> bulbs to get correct bulb IP
+    private static int i;
+    public static ArrayList<String> bulbs;
+    public static String response;
+    public static JSONObject jo;
 
-    public SocketConnector(String ip, int port) throws IOException {
-        sck = new Socket(ip, port);
-        is = new DataInputStream(sck.getInputStream());
-        os = new DataOutputStream(sck.getOutputStream());
-        pw = new PrintWriter(os);
-        in = new BufferedReader(new InputStreamReader(is));
+    private static String translate(Object c){
+        return g.toJson(c);
     }
 
-    public void sendMessage(String message) throws IOException {
-        c = new char[5];
-        pw.println(message);
+    protected SocketConnector(int index){
+        i = index;
+        try {
+            bulbs = SSDPCommunication.getIP();
+            sck = new Socket(bulbs.get(index), 55443);
+            System.out.println(bulbs.get(index));
+            is = new DataInputStream(sck.getInputStream());
+            os = new DataOutputStream(sck.getOutputStream());
+            pw = new PrintWriter(os);
+            in = new BufferedReader(new InputStreamReader(is));
+            System.out.println("Socket Connector Initialized");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    protected static void sendMessage(Object object) {
+        pw.println(translate(object));
         pw.flush();
-        response = new JSONObject(in.readLine()).toString();
+        try {
+            String s = in.readLine();
+            s = s.substring(s.lastIndexOf(':') + 1);
+            response = s;
+            System.out.println(s);
+            if(s.equals("\"client quota exceeded\"}}")) {
+                System.out.println("Connection restarting");
+                restartConnection();
+                System.out.println("Connection restarted");
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
     }
 
-    public void close() throws IOException {
+    //Yeelight software unfortunatelly has limitation on API calls - 60 per minute.
+    //Here's a little workaround that will bypass this limitation and increase it to around 150 calls per minute.
+    //I'm pretty proud of this one, got to say. I feel like mr. Robot xD
+    protected static void restartConnection() throws IOException, InterruptedException {
+        closeConnection();
+        TimeUnit.SECONDS.sleep(1);
+        new SocketConnector(0);
+    }
+    protected static void closeConnection() throws IOException {
         is.close();
         os.close();
         sck.close();

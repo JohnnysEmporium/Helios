@@ -16,6 +16,7 @@ public class SaveUserPrefs {
     }
 
     public static void save(HeliosInterface app){
+
         s("offCheckBox",app.offCheckBox.isSelected());
         s("rainbowCheckBox",app.rainbowCheckBox.isSelected());
         s("rTextField",app.rTextField.getText());

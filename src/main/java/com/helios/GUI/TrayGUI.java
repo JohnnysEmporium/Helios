@@ -5,7 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-//TO DO: DIVIDE CLASSES BETWEEN POPUPMENU AND JFRAME
+//TODO: Fiddle with music mode, can be fun, maybe integration with spotify?
+
 
 public class TrayGUI extends JFrame {
     Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();

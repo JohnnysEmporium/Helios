@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +39,11 @@ class SocketConnector {
             pw = new PrintWriter(os);
             in = new BufferedReader(new InputStreamReader(is));
             System.out.println("Socket Connector Initialized");
-        } catch (Exception e) {
+        } catch (SocketTimeoutException e) {
+            //If there's no answer from the socket after 1s, restart the connection and try again
+            //Change the timeout duration in SSDPCommunication.java
+            new SocketConnector(0);
+        } catch (Exception e){
             System.out.println(e);
         }
     }

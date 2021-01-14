@@ -118,7 +118,7 @@ public class TrayGUI extends JFrame {
         setMaximumSize(new Dimension(width, height));
         setMinimumSize(new Dimension(width, height));
         setLocation(screen.width - width + 8, screen.height - height + 8);
-
+        System.out.println("Size and location set");
 
         //SHOW THE FRAME
         gui = new HeliosInterface();

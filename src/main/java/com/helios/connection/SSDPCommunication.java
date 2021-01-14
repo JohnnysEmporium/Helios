@@ -4,15 +4,20 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+//TODO: find out how to cooperate with VPNs
+//When there's VPN in the picture, the DatagramSocket.receive() method looks in the VPN network, causing application
+//hang when there's no response and no soft timeout is set
 
 public class SSDPCommunication {
 
     //Sends a prepareted data packet to multicast address in order to receive the information about UPnP devices in the network
     //In this case it's wifi_bulb
-    private static String findDevices() throws IOException {
+    private static String findDevices() throws IOException, SocketTimeoutException {
         /* create byte arrays to hold our send and response data */
         byte[] sendData;
         byte[] receiveData = new byte[1024];
@@ -33,6 +38,9 @@ public class SSDPCommunication {
 
         /* recieve response and store in our receivePacket */
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+        System.out.println("..");
+        //Timeout after 1 seconds
+        clientSocket.setSoTimeout(1000);
         clientSocket.receive(receivePacket);
 
         /* get the response as a string */
@@ -40,7 +48,7 @@ public class SSDPCommunication {
 
         /* close the socket */
         clientSocket.close();
-
+        System.out.println("---SSDP RESPONSE---\n" + response + "\n-------------------");
         return response;
     }
 

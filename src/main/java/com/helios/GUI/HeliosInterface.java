@@ -27,6 +27,7 @@ public class HeliosInterface extends JPanel {
         power = new YeelightAPI.Power();
         colorTemp = new YeelightAPI.ColorTemp();
         flow = new YeelightAPI.Flow();
+        System.out.println("YeelightAPI components initiated");
 
         //Initizlize GUI components
         checkBoxPanel = new JPanel();
@@ -54,7 +55,8 @@ public class HeliosInterface extends JPanel {
         cancelButton = new JButton();
         mainBackgroundColor = new Color(60, 63, 66);
         mainForegroundColor = new Color(188, 188, 188);
-        buttonReleaseColor = new Color(35,35,35);
+        buttonPressedColor = new Color(35,35,35);
+        System.out.println("HeliosInterface components initiated");
 
         //======== this ========
         setMaximumSize(new Dimension(360, 550));
@@ -267,7 +269,7 @@ public class HeliosInterface extends JPanel {
             saveButton.setBackground(mainBackgroundColor);
             saveButton.setForeground(mainForegroundColor);
             saveButton.setContentAreaFilled(false);
-            saveButton.addMouseListener(new ButtonsListener(saveButton, mainForegroundColor, buttonReleaseColor));
+            saveButton.addMouseListener(new ButtonsListener(saveButton, buttonPressedColor, mainForegroundColor));
             saveButton.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(mainForegroundColor, 1),
                     BorderFactory.createEmptyBorder(5, 10, 5, 10)));
@@ -279,12 +281,13 @@ public class HeliosInterface extends JPanel {
             });
             actionPanel.add(saveButton, "cell 0 0,align center center,grow 0 0");
 
+            //TODO: tidy the borders, setBorder can be used in listener class
             //---- discardButton ----
             discardButton.setText("Discard");
             discardButton.setBackground(mainBackgroundColor);
             discardButton.setForeground(mainForegroundColor);
             discardButton.setContentAreaFilled(false);
-            discardButton.addMouseListener(new ButtonsListener(discardButton, mainForegroundColor, buttonReleaseColor));
+            discardButton.addMouseListener(new ButtonsListener(discardButton, buttonPressedColor, mainForegroundColor));
             discardButton.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(mainForegroundColor, 1),
                     BorderFactory.createEmptyBorder(5, 10, 5, 10)));
@@ -296,13 +299,13 @@ public class HeliosInterface extends JPanel {
             });
             actionPanel.add(discardButton, "cell 1 0,align center center,grow 0 0");
 
-
+            //TODO: Create custom class for buttons, to not be so repetitive
             //---- cancelButton ----
             cancelButton.setText("Cancel");
             cancelButton.setBackground(mainBackgroundColor);
             cancelButton.setForeground(mainForegroundColor);
             cancelButton.setContentAreaFilled(false);
-            cancelButton.addMouseListener(new ButtonsListener(cancelButton, mainForegroundColor, buttonReleaseColor));
+            cancelButton.addMouseListener(new ButtonsListener(cancelButton, buttonPressedColor, mainForegroundColor));
             cancelButton.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(mainForegroundColor, 1),
                     BorderFactory.createEmptyBorder(5, 10, 5, 10)));
@@ -357,5 +360,5 @@ public class HeliosInterface extends JPanel {
     JButton cancelButton;
     Color mainBackgroundColor;
     Color mainForegroundColor;
-    Color buttonReleaseColor;
+    Color buttonPressedColor;
 }

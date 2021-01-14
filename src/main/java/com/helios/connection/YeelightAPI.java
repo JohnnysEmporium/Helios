@@ -115,4 +115,11 @@ public class YeelightAPI extends SocketConnector{
         }
 
     }
+
+    public static void main(String[] args){
+        YeelightAPI y;
+        y = new YeelightAPI(0);
+        System.out.println("y set");
+    }
+
 }

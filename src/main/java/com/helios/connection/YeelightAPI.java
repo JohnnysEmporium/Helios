@@ -120,6 +120,7 @@ public class YeelightAPI extends SocketConnector{
         YeelightAPI y;
         y = new YeelightAPI(0);
         System.out.println("y set");
+        new YeelightAPI.Power().setPower("on", "sudden", 0);
     }
 
 }

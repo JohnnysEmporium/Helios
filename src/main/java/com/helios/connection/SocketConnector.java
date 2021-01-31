@@ -19,7 +19,7 @@ class SocketConnector {
     private static BufferedReader in;
     private static PrintWriter pw;
     //Bulb index passed to ArrayList<String> bulbs to get correct bulb IP
-    private static int i;
+    private static int idx;
     public static ArrayList<String> bulbs;
     public static String response;
     public static JSONObject jo;
@@ -29,7 +29,7 @@ class SocketConnector {
     }
 
     protected SocketConnector(int index){
-        i = index;
+        idx = index;
         try {
             bulbs = SSDPCommunication.getIP();
             sck = new Socket(bulbs.get(index), 55443);

@@ -13,11 +13,12 @@ import java.awt.event.FocusListener;
 //Prevents entering value higher than 255 in text fields
 //Changes the color of rgbColorLabel to match given rgb values
 //Put into inner class to avoid code repetition
-public class RGBListener implements DocumentListener, FocusListener {
+public class RGB255Listener implements DocumentListener {
     YeelightAPI.RGB rgb_;
     JTextField textField_;
     JLabel rgbColorLabel_;
-    public RGBListener(JTextField textField, JLabel rgbColorLabel){
+
+    public RGB255Listener(JTextField textField, JLabel rgbColorLabel){
         rgb_ = new YeelightAPI.RGB();
         textField_ = textField;
         rgbColorLabel_ = rgbColorLabel;
@@ -63,18 +64,5 @@ public class RGBListener implements DocumentListener, FocusListener {
     @Override
     public void changedUpdate(DocumentEvent e) {
 
-    }
-
-    @Override
-    public void focusGained(FocusEvent e) {
-
-    }
-
-    //TODO: Fix inserting 0 into rgb text fields on focus lost
-    @Override
-    public void focusLost(FocusEvent e) {
-        if(textField_.getText().equals("")){
-            textField_.setText("0");
-        }
     }
 }

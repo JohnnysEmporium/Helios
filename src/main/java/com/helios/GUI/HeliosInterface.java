@@ -6,9 +6,10 @@ import javax.swing.*;
 
 import com.helios.GUI.CustomInterfaceItems.GradientLabel;
 import com.helios.GUI.CustomInterfaceItems.JTextFieldLimit;
+import com.helios.GUI.Listeners.RGBFocusListener;
 import com.helios.GUI.Listeners.SliderListener;
 import com.helios.GUI.Listeners.ButtonsListener;
-import com.helios.GUI.Listeners.RGBListener;
+import com.helios.GUI.Listeners.RGB255Listener;
 import com.helios.connection.YeelightAPI;
 import net.miginfocom.swing.*;
 
@@ -146,9 +147,9 @@ public class HeliosInterface extends JPanel {
             rTextField.setBackground(mainBackgroundColor);
             rTextField.setForeground(mainForegroundColor);
             rTextField.setDocument(new JTextFieldLimit(3));
-            rTextField.setText("0");
             rTextField.setName("r");
-            rTextField.getDocument().addDocumentListener(new RGBListener(rTextField, rgbColorLabel));
+            rTextField.getDocument().addDocumentListener(new RGB255Listener(rTextField, rgbColorLabel));
+            rTextField.addFocusListener(new RGBFocusListener(rTextField));
             rTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(rTextField, "cell 0 1,align center center,growx");
 
@@ -156,20 +157,17 @@ public class HeliosInterface extends JPanel {
             gTextField.setBackground(mainBackgroundColor);
             gTextField.setForeground(mainForegroundColor);
             gTextField.setDocument(new JTextFieldLimit(3));
-            gTextField.setText("0");
             gTextField.setName("g");
-            gTextField.getDocument().addDocumentListener(new RGBListener(gTextField, rgbColorLabel));
+            gTextField.getDocument().addDocumentListener(new RGB255Listener(gTextField, rgbColorLabel));
             gTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(gTextField, "cell 1 1,align center center,growx");
 
             //---- bTextField ----
-            bTextField.setText("0");
             bTextField.setBackground(mainBackgroundColor);
             bTextField.setForeground(mainForegroundColor);
             bTextField.setDocument(new JTextFieldLimit(3));
-            bTextField.setText("0");
             bTextField.setName("b");
-            bTextField.getDocument().addDocumentListener(new RGBListener(bTextField, rgbColorLabel));
+            bTextField.getDocument().addDocumentListener(new RGB255Listener(bTextField, rgbColorLabel));
             bTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(bTextField, "cell 2 1,align center center,growx");
 

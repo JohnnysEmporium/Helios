@@ -147,7 +147,16 @@ public class TrayGUI extends JFrame {
         System.out.println("Tray icon removed");
     }
 
+    //TODO: Write actions to perform on application exit
+    //TODO: To run as a service wrap in Launch4j -> exe file -> install exe as service
     public static void main(String[] args){
+        Thread sdHook = new Thread("Helios-shutdown-hook"){
+            public void run(){
+                System.out.println("printed from HOOK");
+            }
+
+        };
+        Runtime.getRuntime().addShutdownHook(sdHook);
         TrayGUI t = new TrayGUI();
     }
 

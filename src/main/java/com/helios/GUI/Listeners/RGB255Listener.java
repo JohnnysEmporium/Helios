@@ -1,31 +1,26 @@
 package com.helios.GUI.Listeners;
 
-import com.helios.connection.YeelightAPI;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
-//DocumentListener custom class
-//Prevents entering value higher than 255 in text fields
-//Changes the color of rgbColorLabel to match given rgb values
-//Put into inner class to avoid code repetition
+import com.helios.GUI.CustomInterfaceItems.TextField;
+/*
+DocumentListener custom class
+Prevents entering value higher than 255 in text fields
+Changes the color of rgbColorLabel to match given rgb values
+ */
 public class RGB255Listener implements DocumentListener {
-    YeelightAPI.RGB rgb_;
-    JTextField textField_;
+    TextField textField_;
     JLabel rgbColorLabel_;
 
-    public RGB255Listener(JTextField textField, JLabel rgbColorLabel){
-        rgb_ = new YeelightAPI.RGB();
+    public RGB255Listener(TextField textField, JLabel rgbColorLabel){
         textField_ = textField;
         rgbColorLabel_ = rgbColorLabel;
     }
 
     //Change label color depending on which text field got changed
-    private void changeLabelColor(){
+    void changeLabelColor(){
         Color temp = rgbColorLabel_.getBackground();
         String name = textField_.getName();
         if(name.equals("r")){
@@ -36,7 +31,7 @@ public class RGB255Listener implements DocumentListener {
             rgbColorLabel_.setBackground(new Color(temp.getRed(), temp.getGreen(), Integer.parseInt(textField_.getText())));
         }
         temp = rgbColorLabel_.getBackground();
-        rgb_.setRGB(temp.getRed(), temp.getGreen(), temp.getBlue(), "sudden", 0);
+        textField_.push(temp.getRed(), temp.getGreen(), temp.getBlue());
     }
 
     //Check if value inside the field is over 255, if is, insert 255

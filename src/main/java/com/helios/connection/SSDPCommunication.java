@@ -40,7 +40,7 @@ public class SSDPCommunication {
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
         System.out.println("..");
         //Timeout after 1 seconds
-        clientSocket.setSoTimeout(1000);
+        clientSocket.setSoTimeout(2000);
         clientSocket.receive(receivePacket);
 
         /* get the response as a string */

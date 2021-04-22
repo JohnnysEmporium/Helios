@@ -35,7 +35,6 @@ public class YeelightAPI extends SocketConnector{
             params[1] = mode;
             params[2] = duration;
             YeelightAPI.sendMessage(this);
-
         }
     }
 
@@ -65,8 +64,6 @@ public class YeelightAPI extends SocketConnector{
     public static class Bright extends Methods {
         private String method = "set_bright";
         private Object[] params = new Object[3];
-
-        //TODO: Correct the message sending mechanism, optimization, decide which class is best for holding connection values
 
         public void setBright(int intensity, String mode, int duration) {
             params[0] = intensity;

@@ -1,14 +1,19 @@
 package com.helios.GUI.Listeners;
 
+import com.helios.GUI.CustomInterfaceItems.TextField;
+
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class RGBFocusListener implements FocusListener {
-    private JTextField textField_;
+/*
+Custom FocusListener class
+ */
 
-    public RGBFocusListener(JTextField textField){
-        textField_ = textField;
+public class RGBFocusListener extends RGB255Listener implements FocusListener {
+
+    public RGBFocusListener(TextField textField, JLabel rgbColorLabel){
+        super(textField, rgbColorLabel);
     }
 
     @Override
@@ -16,10 +21,12 @@ public class RGBFocusListener implements FocusListener {
 
     }
 
+    //On focusLost event, check if text field is empty and change label color
     @Override
     public void focusLost(FocusEvent e) {
-        if(textField_.getText().equals("")){
-            textField_.setText("0");
+        if(super.textField_.getText().equals("")){
+            super.textField_.setText("0");
         }
+        changeLabelColor();
     }
 }

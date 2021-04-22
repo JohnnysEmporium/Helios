@@ -2,9 +2,12 @@ package com.helios.GUI;
 
 import java.util.prefs.Preferences;
 
+//TODO: prevent triggering bulb update when loading settings
+
 public class LoadUserPrefs {
     private static Preferences p = Preferences.userRoot().node("com/helios/userPrefs");
 
+    //LoadInt, LoadBoolean, LoadString
     private static int li(String k){
         return p.getInt(k, 0);
     }

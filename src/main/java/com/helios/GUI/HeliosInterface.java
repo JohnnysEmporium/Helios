@@ -3,11 +3,13 @@ package com.helios.GUI;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.helios.GUI.CustomInterfaceItems.GradientLabel;
-import com.helios.GUI.CustomInterfaceItems.JTextFieldLimit;
+import com.helios.GUI.CustomInterfaceItems.TextField;
+import com.helios.GUI.CustomInterfaceItems.Slider;
 import com.helios.GUI.Listeners.RGBFocusListener;
-import com.helios.GUI.Listeners.SliderListener;
 import com.helios.GUI.Listeners.ButtonsListener;
 import com.helios.GUI.Listeners.RGB255Listener;
 import com.helios.connection.YeelightAPI;
@@ -16,6 +18,12 @@ import net.miginfocom.swing.*;
 /**
  * @author unknown
  */
+/*
+IMPORTANT
+It's crucial for all items that have names set to have names set.
+Names are being referred to later on in Listeners.
+ */
+
 public class HeliosInterface extends JPanel {
     public HeliosInterface() {
         initComponents();
@@ -38,17 +46,17 @@ public class HeliosInterface extends JPanel {
         rLabel = new JLabel();
         gLabel = new JLabel();
         bLabel = new JLabel();
-        rTextField = new JTextField();
-        gTextField = new JTextField();
-        bTextField = new JTextField();
+        rTextField = new TextField("r", mainForegroundColor, mainBackgroundColor);
+        gTextField = new TextField("g", mainForegroundColor, mainBackgroundColor);
+        bTextField = new TextField("b", mainForegroundColor, mainBackgroundColor);
         rgbColorLabel = new JLabel();
         ctPanel = new JPanel();
         ctLabel = new JLabel();
-        ctSlider = new JSlider(1700,6500);
+        ctSlider = new Slider(1700,6500, "ct", mainForegroundColor, mainBackgroundColor);
         ctGradient = new GradientLabel();
         brightnessPanel = new JPanel();
         brightnessLabel = new JLabel();
-        brightnessSlider = new JSlider(1,100);
+        brightnessSlider = new Slider(1,100, "bright", mainForegroundColor, mainBackgroundColor);
         brightnessPercentageLabel = new JLabel();
         actionPanel = new JPanel();
         saveButton = new JButton();
@@ -144,30 +152,20 @@ public class HeliosInterface extends JPanel {
             rgbPanel.add(bLabel, "cell 2 0,align center center,grow 0 0");
 
             //---- rTextField ----
-            rTextField.setBackground(mainBackgroundColor);
-            rTextField.setForeground(mainForegroundColor);
-            rTextField.setDocument(new JTextFieldLimit(3));
-            rTextField.setName("r");
             rTextField.getDocument().addDocumentListener(new RGB255Listener(rTextField, rgbColorLabel));
-            rTextField.addFocusListener(new RGBFocusListener(rTextField));
+            rTextField.addFocusListener(new RGBFocusListener(rTextField, rgbColorLabel));
             rTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(rTextField, "cell 0 1,align center center,growx");
 
             //---- gTextField ----
-            gTextField.setBackground(mainBackgroundColor);
-            gTextField.setForeground(mainForegroundColor);
-            gTextField.setDocument(new JTextFieldLimit(3));
-            gTextField.setName("g");
             gTextField.getDocument().addDocumentListener(new RGB255Listener(gTextField, rgbColorLabel));
+            gTextField.addFocusListener(new RGBFocusListener(gTextField, rgbColorLabel));
             gTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(gTextField, "cell 1 1,align center center,growx");
 
             //---- bTextField ----
-            bTextField.setBackground(mainBackgroundColor);
-            bTextField.setForeground(mainForegroundColor);
-            bTextField.setDocument(new JTextFieldLimit(3));
-            bTextField.setName("b");
             bTextField.getDocument().addDocumentListener(new RGB255Listener(bTextField, rgbColorLabel));
+            bTextField.addFocusListener(new RGBFocusListener(bTextField, rgbColorLabel));
             bTextField.setHorizontalAlignment(SwingConstants.CENTER);
             rgbPanel.add(bTextField, "cell 2 1,align center center,growx");
 
@@ -200,11 +198,7 @@ public class HeliosInterface extends JPanel {
             ctPanel.add(ctLabel, "cell 0 0,align center center,grow 0 0");
 
             //---- ctSlider ----
-            ctSlider.setBackground(mainBackgroundColor);
-            ctSlider.setForeground(mainForegroundColor);
-            ctSlider.setName("ct");
             ctSlider.setInverted(true);
-            ctSlider.addMouseListener(new SliderListener(ctSlider));
             ctPanel.add(ctSlider, "cell 0 1,align center center,growx");
 
             //---- ctGradient ----
@@ -234,10 +228,13 @@ public class HeliosInterface extends JPanel {
             brightnessPanel.add(brightnessLabel, "cell 0 0,align center center,grow 0 0");
 
             //---- brightnessSlider ----
-            brightnessSlider.setBackground(mainBackgroundColor);
-            brightnessSlider.setForeground(mainForegroundColor);
-            brightnessSlider.setName("brightness");
-            brightnessSlider.addMouseListener(new SliderListener(brightnessSlider, brightnessPercentageLabel));
+            //When value of the slider changes, change also the value of the label
+            brightnessSlider.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    brightnessPercentageLabel.setText(String.valueOf(brightnessSlider.getValue()) + "%");
+                }
+            });
             brightnessPanel.add(brightnessSlider, "cell 0 1,align center center,growx");
 
             //---- brightnessPercentageLabel ----
@@ -325,6 +322,7 @@ public class HeliosInterface extends JPanel {
     }
     private void load(){
         LoadUserPrefs.load(this);
+
     }
 
     //Bulb Controls
@@ -340,17 +338,17 @@ public class HeliosInterface extends JPanel {
     JLabel rLabel;
     JLabel gLabel;
     JLabel bLabel;
-    JTextField rTextField;
-    JTextField gTextField;
-    JTextField bTextField;
+    TextField rTextField;
+    TextField gTextField;
+    TextField bTextField;
     JLabel rgbColorLabel;
     JPanel ctPanel;
     JLabel ctLabel;
-    JSlider ctSlider;
+    Slider ctSlider;
     GradientLabel ctGradient;
     JPanel brightnessPanel;
     JLabel brightnessLabel;
-    JSlider brightnessSlider;
+    Slider brightnessSlider;
     JLabel brightnessPercentageLabel;
     JPanel actionPanel;
     JButton saveButton;
